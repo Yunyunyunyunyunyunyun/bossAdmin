@@ -2,7 +2,7 @@ export const adminmenu = [
   {
     label: '客户管理',
     value: 'customer',
-    icon: 'el-icon-user',
+    src: '../../../../static/images/customer.png',
     children: [
       {
         label: '客户信息配置',
@@ -13,7 +13,7 @@ export const adminmenu = [
   {
     label: '权限管理',
     value: 'authority',
-    icon: 'el-icon-menu',
+    src: '../../../../static/images/authority.png',
     children: [
       {
         label: '菜单模板',
@@ -32,7 +32,7 @@ export const adminmenu = [
   {
     label: '设备管理',
     value: 'equipment',
-    icon: 'el-icon-sell',
+    src: '../../../../static/images/equipment.png',
     children: [
       {
         label: '设备入库',
@@ -51,7 +51,7 @@ export const adminmenu = [
   {
     label: '帐户管理',
     value: 'account',
-    icon: 'el-icon-lock',
+    src: '../../../../static/images/account.png',
     children: [
       {
         label: '账号配置',
@@ -66,7 +66,7 @@ export const adminmenu = [
   {
     label: '系统管理',
     value: 'system',
-    icon: 'el-icon-set-up',
+    src: '../../../../static/images/system.png',
     children: [
       {
         label: '系统菜单模板',

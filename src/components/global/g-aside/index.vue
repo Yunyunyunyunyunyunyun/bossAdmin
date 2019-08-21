@@ -11,8 +11,9 @@
       <el-submenu :index="item.value" v-for="(item, index) in menudata" :key="index">
         <!-- 一级菜单 -->
         <template slot="title">
-          <i :class="item.icon"></i>
-          <span>{{item.label}}</span>
+          <!-- <i :class="item.icon"></i> -->
+          <img :src="item.src"/>
+          <span class="titCont">{{item.label}}</span>
         </template>
         <template v-for="subitem in item.children">
           <!-- 二级菜单--有菜单 -->
@@ -109,7 +110,7 @@ export default {
   .el-menu:not(.el-menu--collapse) {
     width: 200px;
   }
-  .el-submenu__title, .el-submenu [class^="el-icon-"] {
+  .el-submenu__title {
     font-size: 16px;
     color: #333;
   }
@@ -121,8 +122,11 @@ export default {
   .el-menu-item.is-active, .el-submenu__title:hover, .el-menu-item:hover {
     background: #fff;
   }
-  .el-menu-item.is-active, .el-submenu.is-active .el-submenu__title, .el-submenu.is-active .el-submenu__title i {
+  .el-menu-item.is-active, .el-submenu.is-active .el-submenu__title {
     color: #4c8cf8;
+  }
+  .titCont {
+    padding-left: 13px;
   }
 }
 </style>

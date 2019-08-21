@@ -1,10 +1,12 @@
 <template>
   <div class="g-header">
     <div class="left">
+      <img src="../../../../static/images/logo.png" class="img"/>
       <span class="logo">BOSS管理系统</span>
     </div>
     <div class="right">
       <el-avatar class="avatar" size="small" :src="squareUrl"></el-avatar><span class="name">{{username}}</span>
+      <img src="../../../../static/images/logout.png" class="log"/>
       <span @click="logout" class="logout">退出</span>
     </div>
   </div>
@@ -18,7 +20,7 @@ export default {
       activeIndex: '1',
       username: 'admin',
       squareUrl:
-        'https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png'
+        '../../../../static/images/avatar.png'
     }
   },
   created () {
@@ -63,14 +65,21 @@ export default {
   .left {
     float: left;
     width: 200px;
+    height: 50px;
+    line-height: 50px;
+    .img {
+      margin-top: 9px;
+      margin-left: 6px;
+    }
     .logo {
       font-weight: 600;
-      margin-left: 15px;
+      margin-left: 13px;
+      vertical-align: top;
     }
   }
   .right {
     float: right;
-    width: 200px;
+    width: 205px;
     height: 50px;
     line-height: 50px;
     .avatar {
@@ -80,9 +89,14 @@ export default {
       vertical-align: top;
       padding-left: 16px;
     }
-    .logout {
+    .log {
       vertical-align: top;
       padding-left: 40px;
+       margin-top: 16.5px;
+    }
+    .logout {
+      vertical-align: top;
+      padding-left: 12px;
     }
   }
 }

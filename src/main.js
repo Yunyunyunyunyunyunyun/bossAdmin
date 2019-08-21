@@ -3,10 +3,11 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+// 兼容ie
+import 'babel-polyfill'
 import Vuex from 'vuex'
 import store from './store'
 import ElementUI from 'element-ui'
-import elementUIVerify from 'element-ui-verify'
 import 'element-ui/lib/theme-chalk/reset.css'
 import './assets/style/element-variables.scss'
 // 全局样式引入
@@ -23,7 +24,6 @@ Vue.prototype.$tableHeaderColor = ({ row, column, rowIndex, columnIndex }) => {
 
 Vue.use(Vuex)
 Vue.use(ElementUI)
-Vue.use(elementUIVerify)
 
 Vue.config.productionTip = false
 
