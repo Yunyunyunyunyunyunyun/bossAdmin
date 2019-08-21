@@ -23,7 +23,7 @@ export default {
 html,
 body,
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'PingFangSC';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100%;

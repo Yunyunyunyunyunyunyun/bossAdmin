@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../views/home/layout.vue'
 import customerRouter from './customer'
+import authorityRouter from './authority'
 Vue.use(Router)
 
 export default new Router({
@@ -12,6 +13,7 @@ export default new Router({
       component: Home
     },
     customerRouter,
+    authorityRouter,
     {
       path: '/login',
       name: 'login',

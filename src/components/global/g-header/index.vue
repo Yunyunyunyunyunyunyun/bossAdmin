@@ -1,11 +1,12 @@
 <template>
   <div class="g-header">
-    <el-row>
-      <el-col :span="20"><span class="logo">BOSS管理系统</span></el-col>
-      <el-col :span="4" class="contain">
-        <el-avatar class="avatar" size="small" :src="squareUrl"></el-avatar><span class="name">{{username}}</span>
-        <span @click="logout" class="logout">退出</span></el-col>
-    </el-row>
+    <div class="left">
+      <span class="logo">BOSS管理系统</span>
+    </div>
+    <div class="right">
+      <el-avatar class="avatar" size="small" :src="squareUrl"></el-avatar><span class="name">{{username}}</span>
+      <span @click="logout" class="logout">退出</span>
+    </div>
   </div>
 </template>
 
@@ -56,26 +57,33 @@ export default {
   background: #4C8CF8;
   height: 50px;
   line-height: 50px;
-  padding: 0 10px;
+  padding: 0 20px;
   color: #fff;
-  .logo {
-    font-size: 8px;
-    font-weight: 600;
-    margin-left: 8px;
-  }
-  .avatar {
-    margin-top: 11px;
-  }
-  .logout {
-    vertical-align: top;
-    padding-left: 16px;
-  }
-  .name {
-    vertical-align: top;
-    padding-left: 8px;
-  }
-  .contain {
+  font-size: 16px;
+  .left {
+    float: left;
     width: 200px;
+    .logo {
+      font-weight: 600;
+      margin-left: 15px;
+    }
+  }
+  .right {
+    float: right;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    .avatar {
+      margin-top: 11px;
+    }
+    .name {
+      vertical-align: top;
+      padding-left: 16px;
+    }
+    .logout {
+      vertical-align: top;
+      padding-left: 40px;
+    }
   }
 }
 </style>

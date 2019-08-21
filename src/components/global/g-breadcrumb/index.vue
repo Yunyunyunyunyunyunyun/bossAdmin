@@ -8,7 +8,7 @@
           v-for="(item, index) in menuArray"
           :key="index"
           :to="item.bpath"
-          :class="index === menuArray.length - 1 ? 'highlight' : ''"
+          :class="index === menuArray.length - 1 ? 'highlight' : 'lowlight'"
         >{{item.bname | filterBname}}</el-breadcrumb-item>
       </template>
     </el-breadcrumb>
@@ -96,19 +96,21 @@ export default {
 <style lang="less">
 .g-breadcrumb {
   background: #f3f4f7;
-  height: 50px;
-  line-height: 50px;
+  height: 46px;
+  line-height: 46px;
   font-size: 14px;
   box-sizing: border-box;
   position: relative;
   margin: 0 16px;
-  .el-breadcrumb__separator[class*="icon"]:first-child {
-    color: #4C8CF8;
-  }
   .el-breadcrumb {
-    padding-top: 17px;
+    padding: 16px 0;
     .el-breadcrumb__inner.is-link {
       font-weight: normal;
+    }
+    .lowlight {
+      .el-breadcrumb__inner, .el-breadcrumb__separator {
+        color: #999;
+      }
     }
     .highlight {
       .el-breadcrumb__inner {

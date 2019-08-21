@@ -67,7 +67,7 @@ export default {
       display: flex;
       flex-direction: column;
       .breadcrumb {
-        height: 50px;
+        height: 46px;
       }
       .main {
         flex: 1;

@@ -2,7 +2,7 @@ export const adminmenu = [
   {
     label: '客户管理',
     value: 'customer',
-    icon: 'el-icon-suitcase',
+    icon: 'el-icon-user',
     children: [
       {
         label: '客户信息配置',
@@ -13,7 +13,7 @@ export const adminmenu = [
   {
     label: '权限管理',
     value: 'authority',
-    icon: 'el-icon-c-scale-to-original',
+    icon: 'el-icon-menu',
     children: [
       {
         label: '菜单模板',

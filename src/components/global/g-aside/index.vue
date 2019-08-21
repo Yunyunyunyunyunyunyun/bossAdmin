@@ -103,16 +103,26 @@ export default {
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
-  // overflow: auto;
   .el-menu {
     border-right: none;
   }
   .el-menu:not(.el-menu--collapse) {
     width: 200px;
-    border-right: solid 1px #e6e6e6;
   }
-  .el-menu-item.is-active {
-    background: #e8f3fe;
+  .el-submenu__title, .el-submenu [class^="el-icon-"] {
+    font-size: 16px;
+    color: #333;
+  }
+  .el-menu-item {
+    padding-left: 55px !important;
+    font-size: 12px;
+    color: #666;
+  }
+  .el-menu-item.is-active, .el-submenu__title:hover, .el-menu-item:hover {
+    background: #fff;
+  }
+  .el-menu-item.is-active, .el-submenu.is-active .el-submenu__title, .el-submenu.is-active .el-submenu__title i {
+    color: #4c8cf8;
   }
 }
 </style>
