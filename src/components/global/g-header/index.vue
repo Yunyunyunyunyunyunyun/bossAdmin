@@ -6,8 +6,10 @@
     </div>
     <div class="right">
       <el-avatar class="avatar" size="small" :src="squareUrl"></el-avatar><span class="name">{{username}}</span>
-      <img src="../../../../static/images/logout.png" class="log"/>
-      <span @click="logout" class="logout">退出</span>
+      <span @click="logout" class="logoutCon">
+        <img src="../../../../static/images/logout.png" class="log"/>
+        <span class="logout">退出</span>
+      </span>
     </div>
   </div>
 </template>
@@ -89,14 +91,18 @@ export default {
       vertical-align: top;
       padding-left: 16px;
     }
-    .log {
-      vertical-align: top;
-      padding-left: 40px;
-       margin-top: 16.5px;
-    }
-    .logout {
-      vertical-align: top;
-      padding-left: 12px;
+    .logoutCon {
+      margin-left: 40px;
+      cursor: pointer;
+      padding-top: 15px;
+      .log {
+        vertical-align: top;
+        margin-top: 16.5px;
+      }
+      .logout {
+        vertical-align: top;
+        padding-left: 12px;
+      }
     }
   }
 }
