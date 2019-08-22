@@ -124,7 +124,7 @@ export default {
             createdAt: '2019-07'
           }
         ],
-        total: 32
+        total: 2
       },
       currentPage: 1,
       pageSize: 10
