@@ -26,32 +26,34 @@
     </div>
     <div>
       <el-table :data="tableData.list" :header-cell-style="$tableHeaderColor" border height="542">
-        <el-table-column prop="ctName" label="客户名称" width="200">
+        <el-table-column prop="ctName" label="客户名称" width="200" align="center">
         </el-table-column>
-        <el-table-column prop="ct" label="客户简称">
+        <el-table-column prop="ct" label="客户简称" align="center">
         </el-table-column>
-        <el-table-column prop="cn" label="业务联系人">
+        <el-table-column prop="cn" label="业务联系人" align="center">
         </el-table-column>
-        <el-table-column label="客户类型">
+        <el-table-column prop="pn" label="手机号" align="center">
+        </el-table-column>
+        <el-table-column label="客户类型" align="center">
           <template slot-scope="scope">
             <span>{{scope.row.ctType == 10?"自营":""}}</span>
             <span>{{scope.row.ctType == 20?"国企":""}}</span>
             <span>{{scope.row.ctType == 30?"私企":""}}</span>
           </template>
         </el-table-column>
-        <el-table-column label="归属战区">
+        <el-table-column label="归属战区" align="center">
           <template slot-scope="scope">
             <span>{{scope.row.addr == 10?"总部":""}}</span>
             <span>{{scope.row.addr == 20?"西部战区":""}}</span>
             <span>{{scope.row.addr == 30?"南部战区":""}}</span>
           </template>
         </el-table-column>
-        <el-table-column label="创建时间" width="200">
+        <el-table-column label="创建时间" width="200" align="center">
           <template slot-scope="scope">
             {{new Date(scope.row.createdAt).Format("yyyy-MM-dd hh:mm:ss")}}
           </template>
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作" align="center">
           <template slot-scope="scope">
             <el-button type="text" size="small" @click="viewPage(scope.row)">
               查看
@@ -108,6 +110,7 @@ export default {
             ctName: '猫先生环保科技有限公司',
             ct: '公司总部',
             cn: '顾泽坤',
+            pn: '150****2123',
             ctType: 10,
             addr: 10,
             createdAt: '2019-07'
@@ -115,6 +118,7 @@ export default {
             ctName: '猫先生环保科技有限公司',
             ct: '公司总部',
             cn: '顾泽坤',
+            pn: '150****2123',
             ctType: 10,
             addr: 10,
             createdAt: '2019-07'
