@@ -12,6 +12,13 @@ export default {
       bname: '客户信息配置',
       component: () =>
         import('../views/customer/customerInfo/index.vue')
+    },
+    {
+      path: '/customer/customerInfo/addCustomer',
+      name: 'addCustomer',
+      bname: '新建客户',
+      component: () =>
+        import('../views/customer/customerInfo/addCustomer.vue')
     }
   ]
 }

@@ -15,7 +15,7 @@
       </el-select>
       <span class="fr tsdBtn">
         <el-button type="primary" icon="el-icon-search" size="medium">查询</el-button>
-        <el-button type="primary" icon="el-icon-plus" size="medium" plain>新建</el-button>
+        <el-button type="primary" icon="el-icon-plus" size="medium" plain @click="addCustom">新建</el-button>
       </span>
     </div>
     <div class="secondTitle">
@@ -140,6 +140,11 @@ export default {
     },
     handleCurrentChange (val) {
       this.currentPage = val
+    },
+    addCustom () {
+      this.$router.push({
+        path: '/customer/customerInfo/addCustomer'
+      })
     }
   }
 }
