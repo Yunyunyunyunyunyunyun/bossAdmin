@@ -13,14 +13,14 @@
           :value="item.value">
         </el-option>
       </el-select>
-      <span class="fr">
+      <span class="fr tsdBtn">
         <el-button type="primary" icon="el-icon-search" size="medium">查询</el-button>
         <el-button type="primary" icon="el-icon-plus" size="medium" plain>新建</el-button>
       </span>
     </div>
     <div class="secondTitle">
       <span>客户列表</span>
-      <span class="fr">
+      <span class="fr seBtn">
         <el-button type="primary" size="medium" icon="el-icon-upload2" plain>批量导出</el-button>
       </span>
     </div>
@@ -198,6 +198,19 @@ export default {
   .el-pagination {
     text-align: center;
     padding: 20px 5px;
+  }
+  .el-button--medium {
+    width: 100px;
+  }
+  .tsdBtn {
+    .el-button [class*="el-icon-"] + span {
+      margin-left: 15px;
+    }
+  }
+  .seBtn {
+    .el-button--medium {
+      padding: 10px;
+    }
   }
 }
 </style>
