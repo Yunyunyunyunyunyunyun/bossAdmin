@@ -18,7 +18,7 @@ import './components/global'
 // 改变table header的背景色
 Vue.prototype.$tableHeaderColor = ({ row, column, rowIndex, columnIndex }) => {
   if (rowIndex === 0) {
-    return 'background-color: #f5f5f5; height: 40px;'
+    return 'background-color: #f3f8ff; height: 52px;'
   }
 }
 
