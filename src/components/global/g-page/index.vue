@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  name: 'g-page',
+  name: 'GPage',
   computed: {}
 }
 </script>
@@ -76,7 +76,6 @@ export default {
         }
         .main {
           flex-grow: 1;
-          background-color: #fff;
           margin-left: 16px;
         }
       }

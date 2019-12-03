@@ -1,6 +1,6 @@
 <template>
   <div class="homepage">
-    <g-page></g-page>
+    <g-page />
   </div>
 </template>
 

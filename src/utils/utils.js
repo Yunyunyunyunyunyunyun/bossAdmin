@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import router from '../router/index'
 
 // 绑定事件 on(element, event, handler)
@@ -40,11 +39,11 @@ export function off () {
  * @param {*} path 路由路径
  */
 export function findBreadcrumb (path) {
-  let temp = []
-  let routerdata = router.options.routes
+  const temp = []
+  const routerdata = router.options.routes
   //
   for (let i = 0; i < routerdata.length; i++) {
-    let objStep1 = {}
+    const objStep1 = {}
     objStep1.path = routerdata[i].path
     objStep1.name = routerdata[i].bname
     temp.push(objStep1)
@@ -55,21 +54,28 @@ export function findBreadcrumb (path) {
           if (routerdata[i].children[j].bname) {
             // 没有'/'--二级菜单
             if (!routerdata[i].children[j].bname.includes('/')) {
-              let objStep2 = {}
+              const objStep2 = {}
               objStep2.path = routerdata[i].children[j].path
               objStep2.name = routerdata[i].children[j].bname
               temp.push(objStep2)
             } else {
-              let pathdata = _.compact(routerdata[i].children[j].path.split('/'))
-              let bnamedata = _.compact(routerdata[i].children[j].bname.split('/'))
-              let objStep2 = {}
+              const pathdata = _.compact(routerdata[i].children[j].path.split('/'))
+              const bnamedata = _.compact(routerdata[i].children[j].bname.split('/'))
+              const objStep2 = {}
               objStep2.path = `/${pathdata[0]}/${pathdata[1]}`
               objStep2.name = bnamedata[0]
               temp.push(objStep2)
-              let objStep3 = {}
+              const objStep3 = {}
               objStep3.path = routerdata[i].children[j].path
               objStep3.name = bnamedata[1]
               temp.push(objStep3)
+            }
+          } else {
+            if (routerdata[i].children[j].meta) {
+              const objStep2 = {}
+              objStep2.path = routerdata[i].children[j].path
+              objStep2.name = routerdata[i].children[j].meta.bname
+              temp.push(objStep2)
             }
           }
         }
@@ -77,7 +83,7 @@ export function findBreadcrumb (path) {
     }
   }
   //
-  let find = temp.find(item => {
+  const find = temp.find(item => {
     return item.path === path
   })
   //
@@ -135,11 +141,11 @@ export function dateToAllString (time) {
  */
 export function findThreeLevelMenu (path, menu) {
   // 通过二级路由查找对应的三级路由
-  let array = []
+  const array = []
   let key = 0
   for (let i = 0; i < menu.length; i++) {
     if (menu[i].children.length) {
-      let obj = _.find(menu[i].children, item => {
+      const obj = _.find(menu[i].children, item => {
         return item.value === path
       })
       if (obj && JSON.stringify(obj) !== '{}') {
@@ -172,7 +178,7 @@ export function findRouterData (path, menu) {
   //   label: '测试菜单数据',
   //   value: '/admin'
   // }
-  let patharray = path.split('/')
+  const patharray = path.split('/')
   let obj = {}
   // 二级菜单
   if (patharray.length === 3) {
@@ -192,7 +198,7 @@ export function findRouterData (path, menu) {
     for (let i = 0; i < menu.length; i++) {
       for (let k = 0; k < menu[i].children.length; k++) {
         if (menu[i].children[k].children) {
-          let obj = _.find(menu[i].children[k].children, item => {
+          const obj = _.find(menu[i].children[k].children, item => {
             return item.value === path
           })
           if (obj && JSON.stringify(obj) !== '{}') {
@@ -203,158 +209,7 @@ export function findRouterData (path, menu) {
     }
   }
 }
-// 时间格式化
-/* eslint no-extend-native: ["error", { "exceptions": ["Date"] }] */
-Date.prototype.Format = function (fmt) {
-  var o = {
-    'M+': this.getMonth() + 1, // 月份
-    'd+': this.getDate(), // 日
-    'h+': this.getHours(), // 小时
-    'm+': this.getMinutes(), // 分
-    's+': this.getSeconds(), // 秒
-    'q+': Math.floor((this.getMonth() + 3) / 3), // 季度
-    S: this.getMilliseconds() // 毫秒
-  }
-  if (/(y+)/.test(fmt)) {
-    fmt = fmt.replace(
-      RegExp.$1,
-      (this.getFullYear() + '').substr(4 - RegExp.$1.length)
-    )
-  }
-  for (var k in o) {
-    if (new RegExp('(' + k + ')').test(fmt)) {
-      fmt = fmt.replace(
-        RegExp.$1,
-        RegExp.$1.length === 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length)
-      )
-    }
-  }
-  return fmt
-}
 
-// 多级数组转elementui数组格式
-export function exchangeData (data) {
-  let newdata = []
-  for (let i = 0; i < data.length; i++) {
-    let obj1 = {}
-    obj1.label = data[i].name
-    obj1.value = data[i]._id
-    // 二级
-    if (data[i].children.length) {
-      obj1.children = []
-      for (let k = 0; k < data[i].children.length; k++) {
-        let obj2 = {}
-        obj2.label = data[i].children[k].name
-        obj2.value = data[i].children[k]._id
-        // 三级
-        if (data[i].children[k].children.length) {
-          obj2.children = []
-          for (let j = 0; j < data[i].children[k].children.length; j++) {
-            let obj3 = {}
-            obj3.label = data[i].children[k].children[j].name
-            obj3.value = data[i].children[k].children[j]._id
-            obj2.children.push(obj3)
-          }
-        }
-        obj1.children.push(obj2)
-      }
-    }
-    newdata.push(obj1)
-  }
-  return newdata
-}
-
-// 多级数组转elementui数组格式--咨询模块
-export function exchangeModuleInfoData (data) {
-  let newdata = []
-  for (let i = 0; i < data.length; i++) {
-    let obj1 = {}
-    obj1.label = data[i].moduleName
-    obj1.value = data[i]._id
-    // 二级
-    if (data[i].children.length) {
-      obj1.children = []
-      for (let k = 0; k < data[i].children.length; k++) {
-        let obj2 = {}
-        obj2.label = data[i].children[k].moduleName
-        obj2.value = data[i].children[k]._id
-        // 三级
-        if (data[i].children[k].children.length) {
-          obj2.children = []
-          for (let j = 0; j < data[i].children[k].children.length; j++) {
-            let obj3 = {}
-            obj3.label = data[i].children[k].children[j].moduleName
-            obj3.value = data[i].children[k].children[j]._id
-            obj2.children.push(obj3)
-          }
-        }
-        obj1.children.push(obj2)
-      }
-    }
-    newdata.push(obj1)
-  }
-  return newdata
-}
-
-// 一级数组转elementui数组格式
-// TODO..待更新
-export function exchangeLevel1Data (data) {
-  let newdata = []
-  for (let i = 0; i < data.length; i++) {
-    let obj = {}
-    obj.label = data[i]._id
-    obj.value = data[i].name
-    newdata.push(obj)
-  }
-  return newdata
-}
-
-export function reExchangeLevel1Data (data) {
-  let newdata = []
-  for (let i = 0; i < data.length; i++) {
-    let obj = {}
-    obj.label = data[i].name
-    obj.value = data[i]._id
-    newdata.push(obj)
-  }
-  return newdata
-}
-
-// 查找三级字段
-export function findLevel3Data (data, id) {
-  let obj = {}
-  for (let i = 0; i < data.length; i++) {
-    if (data[i].children && data[i].children.length) {
-      for (let k = 0; k < data[i].children.length; k++) {
-        if (data[i].children[k].children && data[i].children[k].children.length) {
-          obj = data[i].children[k].children.find(item => {
-            return item.value === id
-          })
-          if (obj) {
-            return obj
-          }
-        }
-      }
-    }
-  }
-}
-
-// 修改商品规格
-export function specStr (rule, label, value) {
-  let str = ''
-  str = rule.replace(label, value)
-  return str
-}
-
-// 今天开始时间
-export function getTodayStart () {
-  let date = new Date()
-  date.setHours(0)
-  date.setMinutes(0)
-  date.setSeconds(0)
-  date.setMilliseconds(0)
-  return date
-}
 // 时间格式化
 /* eslint no-extend-native: ["error", { "exceptions": ["Date"] }] */
 Date.prototype.Format = function (fmt) {
@@ -377,11 +232,4 @@ Date.prototype.Format = function (fmt) {
   }
   return fmt
 }
-// 今天结束时间
-export function getTodayEnd () {
-  let date = new Date()
-  date.setHours(23)
-  date.setMinutes(59)
-  date.setSeconds(59)
-  return date
-}
+

@@ -1,18 +1,22 @@
 <template>
   <div class="g-breadcrumb">
     <el-breadcrumb separator-class="el-icon-arrow-right">
-      <!-- <el-breadcrumb-item>当前位置：</el-breadcrumb-item> -->
-      <el-breadcrumb-item to="/" v-if="menuArray.length === 1">首页</el-breadcrumb-item>
-      <template v-else-if="menuArray.length > 1">
+      <template>
+        <el-breadcrumb-item v-if="menuArray[menuArray.length-1].bname === '/homepage/homeIndex'" class="highlight">
+          首页
+        </el-breadcrumb-item>
         <el-breadcrumb-item
           v-for="(item, index) in menuArray"
+          v-else
           :key="index"
           :to="item.bpath"
           :class="index === menuArray.length - 1 ? 'highlight' : 'lowlight'"
-        >{{item.bname | filterBname}}</el-breadcrumb-item>
+        >
+          {{ item.bname | filterBname }}
+        </el-breadcrumb-item>
       </template>
     </el-breadcrumb>
-    <slot></slot>
+    <slot />
   </div>
 </template>
 
@@ -20,10 +24,23 @@
 import * as utils from '../../../utils/utils'
 
 export default {
-  name: 'g-breadcrumb',
+  name: 'GBreadcrumb',
+  filters: {
+    filterBname (path) {
+      return utils.findBreadcrumb(path)
+    }
+  },
   data () {
     return {
       menuArray: []
+    }
+  },
+  computed: {},
+  watch: {
+    $route (to, from) {
+      if (to.path) {
+        this.initData()
+      }
     }
   },
   created () {
@@ -31,16 +48,16 @@ export default {
   },
   methods: {
     initData () {
-      let temp = []
-      let path = this.$route.path
+      const temp = []
+      const path = this.$route.path
       if (path === '/') {
         this.menuArray = [{ bname: '首页导航', bpath: '' }]
         return
       }
-      let patharray = path.split('/')
+      const patharray = path.split('/')
       patharray.splice(0, 1)
       for (let i = 0; i < patharray.length; i++) {
-        let obj = {}
+        const obj = {}
         if (i === 0) {
           obj.bname = `/${patharray[i]}`
           obj.bpath = ''
@@ -60,34 +77,11 @@ export default {
         }
       }
       // 如果有3条数据，第2条不可点击
-      if (temp.length === 3) {
-        temp[1].bpath = ''
-      }
+      // if (temp.length === 3) {
+      //   temp[1].bpath = ''
+      // }
       //
       this.menuArray = temp
-      // 修改样式
-      this.$nextTick(() => {
-        // 第一个分隔符隐藏
-        // let arrow = document.querySelectorAll('.el-icon-arrow-right')
-        // arrow[0].style.display = 'none'
-        // 第一个文字margin-left为12px
-        // let breadcrumb = document.querySelectorAll('.el-breadcrumb__item')
-        // breadcrumb[0].style.marginLeft = '12px'
-        // breadcrumb[0].style.marginRight = '0'
-      })
-    }
-  },
-  computed: {},
-  filters: {
-    filterBname (path) {
-      return utils.findBreadcrumb(path)
-    }
-  },
-  watch: {
-    $route (to, from) {
-      if (to.path) {
-        this.initData()
-      }
     }
   }
 }
@@ -108,13 +102,14 @@ export default {
       font-weight: normal;
     }
     .lowlight {
-      .el-breadcrumb__inner, .el-breadcrumb__separator {
+      .el-breadcrumb__inner,
+      .el-breadcrumb__separator {
         color: #999;
       }
     }
     .highlight {
       .el-breadcrumb__inner {
-        color: #4C8CF8;
+        color: #4c8cf8;
       }
     }
   }

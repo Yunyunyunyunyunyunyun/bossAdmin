@@ -1,13 +1,13 @@
 <template>
   <div class="g-header">
     <div class="left">
-      <img src="../../../../static/images/logo.png" class="img"/>
+      <img src="../../../../static/images/logo.png" class="img">
       <span class="logo">BOSS管理系统</span>
     </div>
     <div class="right">
-      <el-avatar class="avatar" size="small" :src="squareUrl"></el-avatar><span class="name">{{username}}</span>
-      <span @click="logout" class="logoutCon">
-        <img src="../../../../static/images/logout.png" class="log"/>
+      <img src="../../../../static/images/avatar.png" class="avatar"><span class="name">{{ username }} {{ nickname }}</span>
+      <span class="logoutCon" @click="logout">
+        <img src="../../../../static/images/logout.png" class="log">
         <span class="logout">退出</span>
       </span>
     </div>
@@ -15,20 +15,21 @@
 </template>
 
 <script>
+import Server from '../../../API/common'
 export default {
-  name: 'g-header',
+  name: 'GHeader',
   data () {
     return {
       activeIndex: '1',
-      username: 'admin',
-      squareUrl:
-        '../../../../static/images/avatar.png'
+      username: '',
+      nickname: ''
     }
   },
   created () {
-    let user = this.$store.state.user.user
-    if (user.name) {
-      this.username = user.name
+    const user = this.$localstore.get('bossadmin_user')
+    if (user.userName && user.nickName) {
+      this.username = user.userName
+      this.nickname = user.nickName
     }
   },
   methods: {
@@ -39,17 +40,25 @@ export default {
         type: 'warning'
       })
         .then(() => {
-          // 清空各种数据
-          // this.$localstore.set("wzyadmin_login", false);
-          // this.$localstore.set("wzyadmin_user", {});
-          // this.$store.commit("user/user_Mutations", {});
-          // this.$store.commit("common/login_Mutations", false);
-          // this.$localstore.set("wzyadmin_username", "");
-          // this.$localstore.set("wzyadmin_password", "");
-          this.$router.push({ name: 'login' })
+          // 注销
+          Server.logout().then(res => {
+            if (res.code === 0) {
+              this.$message.success('退出' + res.msg)
+              // 清空各种数据
+              this.$localstore.set('bossadmin_login', false)
+              this.$localstore.set('bossadmin_user', {})
+              this.$localstore.set('bossadmin_menus', {})
+              this.$localstore.set('new_bossadmin_menus', [])
+              this.$store.commit('user/user_Mutations', {})
+              this.$store.commit('menus/menus_Mutations', {})
+              this.$store.commit('common/login_Mutations', false)
+              this.$localstore.set('bossadmin_username', '')
+              this.$localstore.set('bossadmin_password', '')
+              this.$router.push('/login')
+            }
+          })
         })
         .catch(() => {
-          //
         })
     }
   }
@@ -58,6 +67,11 @@ export default {
 
 <style lang="less">
 .g-header {
+  position:fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
   background: #4C8CF8;
   height: 50px;
   line-height: 50px;
@@ -81,7 +95,7 @@ export default {
   }
   .right {
     float: right;
-    width: 205px;
+    margin-right: 40px;
     height: 50px;
     line-height: 50px;
     .avatar {

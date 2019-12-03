@@ -12,7 +12,7 @@ const actions = {
 }
 
 const mutations = {
-  USER_MUTATIONS (state, payload) {
+  user_Mutations (state, payload) {
     state.user = payload
   }
 }
